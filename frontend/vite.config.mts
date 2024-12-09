@@ -8,9 +8,15 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    minify: true,
+    sourcemap: true,
+    outDir: path.resolve(__dirname, './../build/dist')
+  },
   plugins: [
     Vue({
       template: { transformAssetUrls },

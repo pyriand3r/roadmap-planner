@@ -6,8 +6,8 @@
             :items="feature_type_list"></v-select>
         <v-label>Estimate</v-label>
         <div class="d-flex flex-row mb-3 mt-1 w-100">
-            <v-btn-toggle v-model="store.editFeature.estimate" :color="estimateColor()" group class="w-100 d-flex">
-                <v-btn v-for="value in feature_estimate_list" :idx="value" :value="value" 
+            <v-btn-toggle v-model="store.editFeature.estimate" :color="colorEstimate" group class="w-100 d-flex">
+                <v-btn v-for="value in feature_estimate_list" :idx="value" :value="value"
                     class="flex-fill">
                     {{ value }}
                 </v-btn>
@@ -55,21 +55,15 @@
 <script setup lang="ts">
 import { feature_type_list, feature_estimate_list } from '@/models';
 import { useFeaturesStore } from '@/store';
+import { estimateColor } from '@/globals';
+import {computed} from "vue";
 
 defineEmits(['clear', 'save'])
 
 const store = useFeaturesStore()
 
-function estimateColor() {
-    switch (store.editFeature.estimate) {
-        case "short":
-            return "light-blue-lighten-2"
-        case "medium":
-            return "orange-lighten-2"
-        case "long":
-            return "red-lighten-2"
-        default:
-            return "primary"
-    }
-}
+const colorEstimate = computed((): string => {
+  return estimateColor(store.editFeature.estimate)
+})
+
 </script>
