@@ -13,6 +13,13 @@
 			"pnpmVersion": "none",
 			"nvmVersion": "latest"
 		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Vue.volar"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.

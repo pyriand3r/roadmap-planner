@@ -2,20 +2,19 @@
     <v-card width="90%" variant="outlined" density="compact" :border="featureTypeBorder(feature.type)" rounded="xl"
         :title="feature.title + ' (' + feature.total_score + ')'" @click="$emit('edit', feature)">
         <template #append>
-            <v-icon icon="mdi-delete" @click="$emit('remove', feature)"></v-icon>
+            <v-chip variant="outlined">{{ feature.estimate }}</v-chip>
+            <v-icon icon="mdi-delete" @click.stop="$emit('remove', feature)"></v-icon>
         </template>
         <v-card-text>
             <div class="d-flex flex-row ga-4 ma-2">
                 <div class="w-50">
                     Customer Score: {{ feature.customer_score }}
                     <v-progress-linear rounded="lg" height="8" v-model="feature.customer_score" color="red-lighten-2" />
-
                 </div>
                 <div class="w-50">
                     Sales Score: {{ feature.sales_score }}
                     <v-progress-linear rounded="lg" height="8" v-model="feature.sales_score"
                         color="light-blue-lighten-2" />
-
                 </div>
             </div>
             <div class="d-flex flex-row ga-4 ma-2">

@@ -4,6 +4,15 @@
         <v-textarea v-model="store.editFeature.description" label="description" variant="outlined"></v-textarea>
         <v-select v-model="store.editFeature.type" variant="outlined" label="Type"
             :items="feature_type_list"></v-select>
+        <v-label>Estimate</v-label>
+        <div class="d-flex flex-row mb-3 mt-1 w-100">
+            <v-btn-toggle v-model="store.editFeature.estimate" :color="estimateColor()" group class="w-100 d-flex">
+                <v-btn v-for="value in feature_estimate_list" :idx="value" :value="value" 
+                    class="flex-fill">
+                    {{ value }}
+                </v-btn>
+            </v-btn-toggle>
+        </div>
         <v-label>Customer score</v-label>
         <v-slider v-model="store.editFeature.customer_score" color="red-lighten-2" :min="0" :max="100" :step="5"
             show-ticks thumb-label>
@@ -37,18 +46,30 @@
             </template>
         </v-slider>
         <v-row class="justify-space-evenly">
-            <v-btn variant="outlined" @click.prevent="$emit('clear', null)">clear</v-btn>
-            <v-btn color="success" variant="outlined" @click.prevent="$emit('save', store.editFeature)">save</v-btn>
+            <v-btn variant="outlined" @click.prevent="$emit('clear')">clear</v-btn>
+            <v-btn color="success" variant="outlined" @click.prevent="$emit('save')">save</v-btn>
         </v-row>
     </v-form>
 </template>
 
 <script setup lang="ts">
-import { feature_type_list } from '@/models';
+import { feature_type_list, feature_estimate_list } from '@/models';
 import { useFeaturesStore } from '@/store';
 
 defineEmits(['clear', 'save'])
 
 const store = useFeaturesStore()
 
+function estimateColor() {
+    switch (store.editFeature.estimate) {
+        case "short":
+            return "light-blue-lighten-2"
+        case "medium":
+            return "orange-lighten-2"
+        case "long":
+            return "red-lighten-2"
+        default:
+            return "primary"
+    }
+}
 </script>

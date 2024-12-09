@@ -13,4 +13,11 @@ type Feature struct {
 	SalesScore    int    `json:"sales_score"`
 	ImpactScore   int    `json:"impact_score"`
 	Type          string `json:"type"`
+	Estimate      string `json:"estimate"`
+}
+
+type Milestone struct {
+	gorm.Model
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }

@@ -5,6 +5,14 @@ export const feature_type_list = [
   "Bug",
 ]
 
+export const feature_estimate_list = [
+  "short",
+  "medium",
+  "long",
+]
+
+export type FeatureEstimate = "short" | "medium" | "long"
+
 export type FeatureType = "" | "Feature" | "Improvement" | "Bug"
 
 export type Feature = {
@@ -16,7 +24,8 @@ export type Feature = {
   sales_score: number,
   impact_score: number,
   total_score: number,
-  type: FeatureType
+  type: FeatureType,
+  estimate: FeatureEstimate,
 }
 
 export function featureSkel(): Feature {
@@ -29,6 +38,7 @@ export function featureSkel(): Feature {
     sales_score: 0,
     impact_score: 0,
     total_score: 0,
-    type: ""
+    type: "",
+    estimate: "medium",
   }
 }
