@@ -10,7 +10,7 @@ import (
 // ###### Feature API ###### //
 
 func handleGetList(ctx echo.Context) error {
-	features := []Feature{}
+	var features []Feature
 	result := db.Find(&features)
 	if result.Error != nil {
 		return result.Error

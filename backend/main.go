@@ -32,8 +32,12 @@ func main() {
 	if err != nil {
 		panic("failed to connect database:")
 	}
-	db.AutoMigrate(&Feature{})
-	db.AutoMigrate(&Milestone{})
+	if err := db.AutoMigrate(&Feature{}); err != nil {
+		panic("failed to migrate features:" + err.Error())
+	}
+	if err := db.AutoMigrate(&Milestone{}); err != nil {
+		panic("failed to migrate milestones:" + err.Error())
+	}
 
 	e := echo.New()
 

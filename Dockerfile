@@ -6,7 +6,8 @@ RUN apt update && \
 WORKDIR /root
 COPY . .
 
-RUN make build
+RUN go build -o build/rplanner -v ./backend/
+RUN cd ./frontend && npm install && npm run build
 
 FROM debian:bookworm
 COPY --from=gobuilder /root/build ./rplanner
