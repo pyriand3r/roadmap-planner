@@ -20,9 +20,17 @@ func main() {
 	if err != nil {
 		panic("could not get current working directory:" + err.Error())
 	}
-	db, err = gorm.Open(sqlite.Open("features.db"), &gorm.Config{})
+
+	if _, err := os.Stat(workDir + "/data"); os.IsNotExist(err) {
+		err = os.Mkdir(workDir+"/data", 0755)
+		if err != nil {
+			panic("could not create data directory:" + err.Error())
+		}
+	}
+
+	db, err = gorm.Open(sqlite.Open("data/features.db"), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic("failed to connect database:")
 	}
 	db.AutoMigrate(&Feature{})
 	db.AutoMigrate(&Milestone{})

@@ -1,6 +1,6 @@
 module pyriand3r/feature-planner
 
-go 1.23.4
+go 1.22.0
 
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
