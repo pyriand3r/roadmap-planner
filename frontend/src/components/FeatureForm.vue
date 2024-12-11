@@ -29,7 +29,7 @@
                     type="number" variant="outlined" hide-details></v-text-field>
             </template>
         </v-slider>
-        <v-label>Internal score</v-label>
+        <v-label>Dev score</v-label>
         <v-slider v-model="store.editFeature.internal_score" color="orange-lighten-2" :min="0" :max="100" :step="5"
             show-ticks thumb-label>
             <template v-slot:append>
