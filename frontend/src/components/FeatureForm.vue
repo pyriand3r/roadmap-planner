@@ -30,18 +30,10 @@
             </template>
         </v-slider>
         <v-label>Dev score</v-label>
-        <v-slider v-model="store.editFeature.internal_score" color="orange-lighten-2" :min="0" :max="100" :step="5"
+        <v-slider v-model="store.editFeature.dev_score" color="orange-lighten-2" :min="0" :max="100" :step="5"
             show-ticks thumb-label>
             <template v-slot:append>
-                <v-text-field v-model="store.editFeature.internal_score" density="compact" style="width: 80px"
-                    type="number" variant="outlined" hide-details></v-text-field>
-            </template>
-        </v-slider>
-        <v-label>Impact score</v-label>
-        <v-slider v-model="store.editFeature.impact_score" color="teal-lighten-2" :min="0" :max="100" :step="5"
-            show-ticks thumb-label>
-            <template v-slot:append>
-                <v-text-field v-model="store.editFeature.impact_score" density="compact" style="width: 80px"
+                <v-text-field v-model="store.editFeature.dev_score" density="compact" style="width: 80px"
                     type="number" variant="outlined" hide-details></v-text-field>
             </template>
         </v-slider>

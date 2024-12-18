@@ -9,9 +9,8 @@ type Feature struct {
 	Title         string `json:"title"`
 	Description   string `json:"description"`
 	CustomerScore int    `json:"customer_score"`
-	InternalScore int    `json:"internal_score"`
+	DevScore      int    `json:"dev_score"`
 	SalesScore    int    `json:"sales_score"`
-	ImpactScore   int    `json:"impact_score"`
 	Type          string `json:"type"`
 	Estimate      string `json:"estimate"`
 }
