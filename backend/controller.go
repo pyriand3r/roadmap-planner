@@ -9,7 +9,7 @@ import (
 
 // ###### Feature API ###### //
 
-func handleGetList(ctx echo.Context) error {
+func featureGetList(ctx echo.Context) error {
 	var features []Feature
 	result := db.Find(&features)
 	if result.Error != nil {
@@ -18,7 +18,7 @@ func handleGetList(ctx echo.Context) error {
 	return ctx.JSONPretty(http.StatusOK, features, "")
 }
 
-func handlePostFeature(ctx echo.Context) error {
+func featurePost(ctx echo.Context) error {
 	f := new(Feature)
 	if err := ctx.Bind(f); err != nil {
 		return err
@@ -30,7 +30,7 @@ func handlePostFeature(ctx echo.Context) error {
 	return ctx.JSONPretty(http.StatusOK, f.ID, "")
 }
 
-func handlePutFeature(ctx echo.Context) error {
+func featurePut(ctx echo.Context) error {
 	f := new(Feature)
 	if err := ctx.Bind(f); err != nil {
 		return err
@@ -42,7 +42,7 @@ func handlePutFeature(ctx echo.Context) error {
 	return ctx.JSONPretty(http.StatusOK, f.ID, "")
 }
 
-func handleDeleteFeature(ctx echo.Context) error {
+func featureDelete(ctx echo.Context) error {
 	id := ctx.Param("id")
 	f := new(Feature)
 	uint64ID, err := strconv.ParseUint(id, 10, 0)
@@ -58,3 +58,24 @@ func handleDeleteFeature(ctx echo.Context) error {
 }
 
 // ###### Milestone API ###### //
+
+func milestoneGetList(ctx echo.Context) error {
+	var milestones []Milestone
+	result := db.Find(&milestones)
+	if result.Error != nil {
+		return result.Error
+	}
+	return ctx.JSONPretty(http.StatusOK, milestones, "")
+}
+
+func milestonePost(ctx echo.Context) error {
+	m := new(Milestone)
+	if err := ctx.Bind(m); err != nil {
+		return err
+	}
+	result := db.Create(m)
+	if result.Error != nil {
+		return result.Error
+	}
+	return ctx.JSONPretty(http.StatusOK, m.ID, "")
+}

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4/middleware"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/labstack/echo/v4/middleware"
 
 	"github.com/labstack/echo/v4"
 	"gorm.io/driver/sqlite"
@@ -45,10 +46,7 @@ func main() {
 		middleware.StaticWithConfig(
 			middleware.StaticConfig{
 				Skipper: func(ctx echo.Context) bool {
-					if strings.HasPrefix(ctx.Request().URL.String(), "/api/") {
-						return true
-					}
-					return false
+					return strings.HasPrefix(ctx.Request().URL.String(), "/api/")
 				},
 				Root:  workDir + "/dist",
 				Index: "index.html",
@@ -57,10 +55,15 @@ func main() {
 		),
 	)
 
-	e.GET("/api/feature", handleGetList)
-	e.POST("/api/feature", handlePostFeature)
-	e.PUT("/api/feature", handlePutFeature)
-	e.DELETE("/api/feature/:id", handleDeleteFeature)
+	api := e.Group("/api")
+
+	api.GET("/feature", featureGetList)
+	api.POST("/feature", featurePost)
+	api.PUT("/feature", featurePut)
+	api.DELETE("/feature/:id", featureDelete)
+
+	api.GET("/milestone", milestoneGetList)
+	api.POST("/milestone", milestonePost)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

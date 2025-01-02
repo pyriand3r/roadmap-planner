@@ -1,19 +1,32 @@
 <template>
+  <v-navigation-drawer v-model="store.sidebarShow" location="right" width="400">
+    <features-sidebar />
+  </v-navigation-drawer>
+  <v-main class="overflow-auto">
   <v-container class="d-flex flex-column ga-6 overflow-y-auto align-center justify-center">
     <transition-group name="list">
       <feature-card v-for="(feature) in store.sorted" :key="feature.ID" :feature="feature" @edit="edit"
-                    @remove="remove"/>
+        @remove="remove" />
     </transition-group>
   </v-container>
+  </v-main>
 </template>
 
 <script setup lang="ts">
-import FeatureCard from "@/components/FeatureCard.vue";
-import {useFeaturesStore} from "@/store";
-import type {Feature} from "@/models";
+import { ref } from "vue";
+import FeatureCard from "@/components/FeatureCard.vue"
+import FeaturesSidebar from "@/sidebar/FeaturesSidebar.vue"
+import { useFeaturesStore } from "@/store/feature"
+import { useMilestoneStore } from "@/store/milestone"
+import type { Feature } from "@/models"
+
+const drawer = ref(true)
 
 const store = useFeaturesStore()
 store.init()
+
+const milestoneStore = useMilestoneStore()
+milestoneStore.init()
 
 function edit(feature: Feature) {
   store.editFeature = JSON.parse(JSON.stringify(feature))
@@ -27,7 +40,8 @@ function remove(feature: Feature) {
 </script>
 
 <style scoped>
-.list-move, /* apply transition to moving elements */
+.list-move,
+/* apply transition to moving elements */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;

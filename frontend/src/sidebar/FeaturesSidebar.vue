@@ -15,10 +15,11 @@
     </v-list-item>
   </v-list>
 </template>
+
 <script setup lang="ts">
 import FeatureForm from "@/components/FeatureForm.vue";
 import {featureSkel} from "@/models";
-import {useFeaturesStore} from "@/store";
+import {useFeaturesStore} from "@/store/feature";
 
 const store = useFeaturesStore()
 

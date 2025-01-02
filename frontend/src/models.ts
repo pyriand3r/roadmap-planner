@@ -25,6 +25,7 @@ export type Feature = {
   total_score: number,
   type: FeatureType,
   estimate: FeatureEstimate,
+  milestone_id: number,
 }
 
 export function featureSkel(): Feature {
@@ -38,5 +39,22 @@ export function featureSkel(): Feature {
     total_score: 0,
     type: "",
     estimate: "medium",
+    milestone_id: 0,
+  }
+}
+
+export type Milestone = {
+  ID: number,
+  title: string,
+  description: string,
+  features: number[],
+}
+
+export function milestoneSkel(): Milestone {
+  return {
+    ID: 0,
+    title: "",
+    description: "",
+    features: [],
   }
 }
